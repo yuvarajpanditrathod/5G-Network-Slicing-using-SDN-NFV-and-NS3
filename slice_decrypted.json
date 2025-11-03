@@ -1,0 +1,68 @@
+{
+  "eMBB": {
+    "name": "eMBB",
+    "port": 5002,
+    "base_bandwidth": 100,
+    "max_bandwidth": 500,
+    "min_bandwidth": 50,
+    "pkt_size": 1400,
+    "target_latency": 10,
+    "reliability": 99.9,
+    "slice_id": "slice_embb_1758708271",
+    "created_from": [
+      "Demo.mp4"
+    ],
+    "status": "active",
+    "slice_name": "eMBB",
+    "current_bandwidth": 100,
+    "display_port": "5002",
+    "display_bandwidth": "100/500 Mbps",
+    "max_latency": 15,
+    "encryption": true,
+    "qos_class": "premium"
+  },
+  "mMTC": {
+    "name": "mMTC",
+    "port": 5003,
+    "base_bandwidth": 20,
+    "max_bandwidth": 100,
+    "min_bandwidth": 5,
+    "pkt_size": 200,
+    "target_latency": 100,
+    "reliability": 99.0,
+    "slice_id": "slice_mmtc_1758782879",
+    "created_from": [
+      "mmtc_traffic.csv"
+    ],
+    "status": "active",
+    "slice_name": "mMTC",
+    "current_bandwidth": 20,
+    "display_port": "5003",
+    "display_bandwidth": "20/100 Mbps",
+    "max_latency": 1000,
+    "encryption": true,
+    "qos_class": "standard"
+  },
+  "URLLC": {
+    "name": "URLLC",
+    "port": 5001,
+    "base_bandwidth": 50,
+    "max_bandwidth": 200,
+    "min_bandwidth": 20,
+    "pkt_size": 64,
+    "target_latency": 1,
+    "reliability": 99.999,
+    "slice_id": "slice_urllc_1758782879",
+    "created_from": [
+      "urllc_traffic.csv"
+    ],
+    "status": "active",
+    "slice_name": "URLLC",
+    "current_bandwidth": 50,
+    "display_port": "5001",
+    "display_bandwidth": "50/200 Mbps",
+    "max_latency": 5,
+    "encryption": true,
+    "qos_class": "ultra"
+  }
+}

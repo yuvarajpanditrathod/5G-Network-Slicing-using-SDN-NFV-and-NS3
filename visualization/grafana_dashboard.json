@@ -1,0 +1,479 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Professional 5G Network Slicing Dashboard",
+    "description": "Comprehensive monitoring for 5G network slices with real-time KPIs, SLA compliance, and performance metrics",
+    "tags": ["5g", "network-slicing", "telecommunications", "monitoring"],
+    "timezone": "browser",
+    "refresh": "5s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Network Slice Overview",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "count(count by (slice)(slice_throughput_mbps))",
+            "refId": "A",
+            "legendFormat": "Active Slices"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "custom": {"displayMode": "basic"},
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "yellow", "value": 2},
+                {"color": "green", "value": 3}
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "background"
+        }
+      },
+      {
+        "id": 2,
+        "title": "URLLC - Ultra-Reliable Low Latency",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "slice_throughput_mbps{slice=\"URLLC\"}",
+            "refId": "A",
+            "legendFormat": "Throughput (Mbps)"
+          },
+          {
+            "expr": "slice_latency_ms{slice=\"URLLC\"}",
+            "refId": "B",
+            "legendFormat": "Latency (ms)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "custom": {
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {"legend": false, "tooltip": false, "vis": false},
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {"type": "linear"},
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {"group": "A", "mode": "none"},
+              "thresholdsStyle": {"mode": "off"}
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "red", "value": 5}
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 6, "y": 0},
+        "options": {
+          "legend": {"calcs": [], "displayMode": "list", "placement": "bottom"},
+          "tooltip": {"mode": "single"}
+        }
+      },
+      {
+        "id": 3,
+        "title": "eMBB - Enhanced Mobile Broadband",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "slice_throughput_mbps{slice=\"eMBB\"}",
+            "refId": "A",
+            "legendFormat": "Throughput (Mbps)"
+          },
+          {
+            "expr": "slice_bandwidth_utilization{slice=\"eMBB\"} * 100",
+            "refId": "B",
+            "legendFormat": "Bandwidth Utilization (%)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "custom": {
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "opacity",
+              "hideFrom": {"legend": false, "tooltip": false, "vis": false},
+              "lineInterpolation": "smooth",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {"type": "linear"},
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {"group": "A", "mode": "none"},
+              "thresholdsStyle": {"mode": "off"}
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 80},
+                {"color": "red", "value": 90}
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 18, "y": 0},
+        "options": {
+          "legend": {"calcs": [], "displayMode": "list", "placement": "bottom"},
+          "tooltip": {"mode": "multi"}
+        }
+      },
+      {
+        "id": 4,
+        "title": "mMTC - Massive Machine Type Communications",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "slice_active_devices{slice=\"mMTC\"}",
+            "refId": "A",
+            "legendFormat": "Active Devices"
+          },
+          {
+            "expr": "slice_packet_loss_percent{slice=\"mMTC\"}",
+            "refId": "B",
+            "legendFormat": "Packet Loss (%)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "custom": {
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {"legend": false, "tooltip": false, "vis": false},
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {"type": "linear"},
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {"group": "A", "mode": "none"},
+              "thresholdsStyle": {"mode": "off"}
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "red", "value": 1}
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8},
+        "options": {
+          "legend": {"calcs": [], "displayMode": "list", "placement": "bottom"},
+          "tooltip": {"mode": "multi"}
+        }
+      },
+      {
+        "id": 5,
+        "title": "Slice Latency Comparison",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "slice_latency_ms{slice=\"URLLC\"}",
+            "refId": "A",
+            "legendFormat": "URLLC"
+          },
+          {
+            "expr": "slice_latency_ms{slice=\"eMBB\"}",
+            "refId": "B",
+            "legendFormat": "eMBB"
+          },
+          {
+            "expr": "slice_latency_ms{slice=\"mMTC\"}",
+            "refId": "C",
+            "legendFormat": "mMTC"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 10},
+                {"color": "red", "value": 50}
+              ]
+            },
+            "unit": "ms"
+          }
+        },
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 16},
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "horizontal",
+          "textMode": "auto",
+          "colorMode": "background"
+        }
+      },
+      {
+        "id": 6,
+        "title": "Reliability & QoS Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "slice_reliability_percent{slice=\"URLLC\"}",
+            "refId": "A",
+            "legendFormat": "URLLC Reliability"
+          },
+          {
+            "expr": "slice_reliability_percent{slice=\"eMBB\"}",
+            "refId": "B",
+            "legendFormat": "eMBB Reliability"
+          },
+          {
+            "expr": "slice_reliability_percent{slice=\"mMTC\"}",
+            "refId": "C",
+            "legendFormat": "mMTC Reliability"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "mappings": [],
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": null},
+                {"color": "yellow", "value": 99},
+                {"color": "green", "value": 99.9}
+              ]
+            },
+            "unit": "percent"
+          }
+        },
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 16},
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "horizontal",
+          "textMode": "auto",
+          "colorMode": "background"
+        }
+      },
+      {
+        "id": 7,
+        "title": "Security & Encryption Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "slice_encryption_status",
+            "refId": "A",
+            "legendFormat": "{{slice}} Encryption"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "mappings": [
+              {"options": {"0": {"text": "Disabled"}}, "type": "value"},
+              {"options": {"1": {"text": "Enabled"}}, "type": "value"}
+            ],
+            "thresholds": {
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "green", "value": 1}
+              ]
+            },
+            "unit": "short"
+          }
+        },
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 16},
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "horizontal",
+          "textMode": "auto",
+          "colorMode": "background"
+        }
+      },
+      {
+        "id": 8,
+        "title": "QoS Violations",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(slice_qos_violations_total[5m])",
+            "refId": "A",
+            "legendFormat": "{{slice}} - {{violation_type}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "custom": {
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "bars",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {"legend": false, "tooltip": false, "vis": false},
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {"type": "linear"},
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {"group": "A", "mode": "normal"},
+              "thresholdsStyle": {"mode": "off"}
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "red", "value": 0.1}
+              ]
+            },
+            "unit": "reqps"
+          }
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 22},
+        "options": {
+          "legend": {"calcs": [], "displayMode": "list", "placement": "bottom"},
+          "tooltip": {"mode": "multi"}
+        }
+      },
+      {
+        "id": 9,
+        "title": "Network Performance Heatmap",
+        "type": "heatmap",
+        "targets": [
+          {
+            "expr": "slice_latency_histogram_ms_bucket",
+            "refId": "A",
+            "legendFormat": "{{le}}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {"legend": false, "tooltip": false, "vis": false},
+              "scaleDistribution": {"type": "linear"}
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 30},
+        "options": {
+          "calculate": false,
+          "calculation": {},
+          "cellGap": 2,
+          "cellValues": {},
+          "color": {
+            "exponent": 0.5,
+            "fill": "dark-orange",
+            "mode": "spectrum",
+            "reverse": false,
+            "scale": "exponential",
+            "scheme": "Spectral",
+            "steps": 64
+          },
+          "exemplars": {"color": "rgba(255,0,255,0.7)"},
+          "filterValues": {"le": 1e-9},
+          "legend": {"show": true},
+          "rowsFrame": {"layout": "auto"},
+          "tooltip": {"show": true, "yHistogram": false},
+          "yAxis": {
+            "axisPlacement": "left",
+            "reverse": false,
+            "unit": "ms"
+          }
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {"selected": true, "text": "All", "value": "$__all"},
+          "definition": "label_values(slice_throughput_mbps, slice)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Slice",
+          "multi": true,
+          "name": "slice",
+          "options": [],
+          "query": "label_values(slice_throughput_mbps, slice)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "links": [],
+    "liveNow": false,
+    "schemaVersion": 27,
+    "style": "dark",
+    "version": 1,
+    "weekStart": ""
+  }
+}

@@ -1,0 +1,22 @@
+# FILE: radio_config.json
+# Per-slice radio/QCI/GBR defaults used by ns-3 simulation or other modules.
+# Edit BRIDGE_NAME, NS3_DIR, CONTROLLER_REST_URL in scripts or files as needed.
+{
+  "slices": {
+    "eMBB": {
+      "qci": 9,
+      "gbr_kbps": 50000,
+      "mbr_kbps": 100000
+    },
+    "URLLC": {
+      "qci": 1,
+      "gbr_kbps": 1000,
+      "mbr_kbps": 5000
+    },
+    "mMTC": {
+      "qci": 6,
+      "gbr_kbps": 50,
+      "mbr_kbps": 200
+    }
+  }
+}

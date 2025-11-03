@@ -1,0 +1,17 @@
+{
+  "eMBB": {
+    "packets": 0,
+    "bytes": 0,
+    "active": true
+  },
+  "mMTC": {
+    "packets": 0,
+    "bytes": 0,
+    "active": true
+  },
+  "URLLC": {
+    "packets": 0,
+    "bytes": 0,
+    "active": true
+  }
+}
