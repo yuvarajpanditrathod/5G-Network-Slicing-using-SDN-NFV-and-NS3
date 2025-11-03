@@ -6,20 +6,6 @@
 
 A professional-grade 5G network slicing orchestration platform featuring dynamic resource allocation, adaptive QoS management, and intelligent traffic handling across multiple slice types (URLLC, eMBB, mMTC).
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [API Reference](#api-reference)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## 🎯 Overview
 
